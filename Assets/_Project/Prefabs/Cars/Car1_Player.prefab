@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 562903090082595657}
   - component: {fileID: 562903090082595656}
   - component: {fileID: 562903090082595655}
+  - component: {fileID: 7847101624493624561}
   m_Layer: 0
   m_Name: Car1_Player
   m_TagString: Untagged
@@ -74,7 +75,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c7a35b458cd6a5498c769d1f094ac4e, type: 2}
+  - {fileID: 2100000, guid: 77ccb59ab7e6fba4b95b29b51a7e522a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,6 +153,31 @@ MonoBehaviour:
   rearWheelTransform:
   - {fileID: 555910371300723046}
   - {fileID: 551837737738588848}
+--- !u!114 &7847101624493624561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557307840937266250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4348f2e27d1f12243a3abcf8d12548a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCarFollow: {fileID: 6971452408129322506}
+  carColorsTextures: {fileID: 570888294313858108}
+  carBullBars: {fileID: 570754260791025186}
+  carHeadLight: {fileID: 570448754852967132}
+  carExhaust: {fileID: 570330228192279854}
+  carTires:
+  - {fileID: 570890099615574558}
+  - {fileID: 570870628812301258}
+  - {fileID: 571212408188746988}
+  - {fileID: 571069904223189944}
+  carWeapons:
+  - {fileID: 6984055113329203647}
+  - {fileID: 6984477616001400387}
 --- !u!1 &557315574799741842
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +276,7 @@ WheelCollider:
     damper: 9000
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
+  m_ForceAppPointDistance: 1
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -364,7 +390,7 @@ WheelCollider:
     damper: 9000
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
+  m_ForceAppPointDistance: 1
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -644,7 +670,7 @@ WheelCollider:
     damper: 9000
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
+  m_ForceAppPointDistance: 1
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -758,7 +784,7 @@ WheelCollider:
     damper: 9000
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
+  m_ForceAppPointDistance: 1
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -954,6 +980,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4260100279101694, guid: 812f81839d590a64eb385d5af445bec4, type: 3}
   m_PrefabInstance: {fileID: 6971452407401446663}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6984055113329203647 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23584629341070520, guid: 812f81839d590a64eb385d5af445bec4, type: 3}
+  m_PrefabInstance: {fileID: 6971452407401446663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6971452407807024569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1014,5 +1045,10 @@ PrefabInstance:
 --- !u!4 &6966952704309544297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4509738153826512, guid: 56a29380a11134c43ab1aa20fa525b14, type: 3}
+  m_PrefabInstance: {fileID: 6971452407807024569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6984477616001400387 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23162748503270394, guid: 56a29380a11134c43ab1aa20fa525b14, type: 3}
   m_PrefabInstance: {fileID: 6971452407807024569}
   m_PrefabAsset: {fileID: 0}
