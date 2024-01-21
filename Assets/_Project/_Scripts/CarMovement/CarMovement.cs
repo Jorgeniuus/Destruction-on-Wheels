@@ -42,6 +42,7 @@ public class CarMovement : MonoBehaviour
     {
         foreach (WheelCollider wheels in rearWheelCollider) wheels.motorTorque = _vertical * motorForce;
         foreach (WheelCollider wheels in frontWheelCollider) wheels.motorTorque = _vertical * motorForce;
+        
         float currentBreaking = _isBreaking ? breakForce : 0f;
         BreakingManager(currentBreaking);
     }
