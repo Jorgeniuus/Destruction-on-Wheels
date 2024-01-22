@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df643323e214ed41a750f92e7c4e531, type: 3}
   m_Name: Color Blue
   m_EditorClassIdentifier: 
+  name: Blue
+  imageColor: {fileID: 0}
   color: {r: 0, g: 0.018124819, b: 1, a: 0}
+  indexToSelectCustom: 0
+  value: 0
+  saleValue: 0
+  locked: 0
