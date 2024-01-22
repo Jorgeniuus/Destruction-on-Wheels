@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc52e386c8646dc48a3aef5cebae15cd, type: 3}
+  m_Name: bullbar 2
+  m_EditorClassIdentifier: 
+  name: Bullbar 2
+  image: {fileID: 21300000, guid: fa1865a4eaaca56429a0a7968575b2b9, type: 3}
+  carBullBar: {fileID: 33997561700165514, guid: 63dcf2a443c0ce643ac9efbe336d73eb, type: 3}
+  indexToSelectCustom: 1
+  value: 0
+  locked: 0

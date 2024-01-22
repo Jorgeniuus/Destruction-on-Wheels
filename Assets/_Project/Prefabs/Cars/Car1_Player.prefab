@@ -166,18 +166,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCarFollow: {fileID: 6971452408129322506}
+  color:
+  - {fileID: 11400000, guid: e24d6c28d9422034a9d10b5f83fd0918, type: 2}
+  - {fileID: 11400000, guid: ff62d965517db094b9cf7962d383e85b, type: 2}
+  - {fileID: 11400000, guid: 35ed9e79275a1e944acf00ba387eb108, type: 2}
+  - {fileID: 11400000, guid: 42af7c717a9bf3a4487561320f2ef4d7, type: 2}
+  tires:
+  - {fileID: 11400000, guid: 101d26a3334bcca4e991a1d4756703c0, type: 2}
+  - {fileID: 11400000, guid: f7dc28c5b1a708342ad7c347b8c091e8, type: 2}
+  - {fileID: 11400000, guid: d7c48580310840e42ad847c5158abf4f, type: 2}
+  bullbar:
+  - {fileID: 11400000, guid: 291f4455c0dc15b4d8bf1b22d560a6f0, type: 2}
+  - {fileID: 11400000, guid: b85b3d0f8ab3172469a2debee3a1e6c2, type: 2}
+  - {fileID: 11400000, guid: f6b5688b55ca2114a95c2bec921853e2, type: 2}
+  - {fileID: 11400000, guid: 135480c908747f346aa8991a10538321, type: 2}
+  headlight:
+  - {fileID: 11400000, guid: 22119c06ca18a844ea4efa8ee7e918a6, type: 2}
+  - {fileID: 11400000, guid: 42e7f8284b98a5a4e86f992814294fd7, type: 2}
+  - {fileID: 11400000, guid: f3c5e5e1938bef4478404019cfe54618, type: 2}
+  - {fileID: 11400000, guid: e4e03e4424e12a4478cdcb62a2b568da, type: 2}
+  - {fileID: 11400000, guid: 04b68eaa280527241b874b069e49f50f, type: 2}
+  gun:
+  - {fileID: 11400000, guid: e26bb78365b22524d8fe07fec2fcf8a6, type: 2}
+  - {fileID: 11400000, guid: b77e599fc9ce85b469c3bab6141ff922, type: 2}
+  - {fileID: 11400000, guid: 63056b3ac503d0b4781d68908070ee59, type: 2}
   carColorsTextures: {fileID: 570888294313858108}
-  carBullBars: {fileID: 570754260791025186}
-  carHeadLight: {fileID: 570448754852967132}
-  carExhaust: {fileID: 570330228192279854}
+  carBullBars: {fileID: 558461228101192872}
+  carHeadLight: {fileID: 562498748877036264}
   carTires:
-  - {fileID: 570890099615574558}
-  - {fileID: 570870628812301258}
-  - {fileID: 571212408188746988}
-  - {fileID: 571069904223189944}
+  - {fileID: 562714751693804142}
+  - {fileID: 562393232593862024}
+  - {fileID: 562921976721147038}
+  - {fileID: 562718431896606958}
   carWeapons:
-  - {fileID: 6984055113329203647}
-  - {fileID: 6984477616001400387}
+  - {fileID: 6973697518560710971}
+  - {fileID: 6974007917198082091}
 --- !u!1 &557315574799741842
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +242,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557315574799741842}
-  m_Mesh: {fileID: 4300002, guid: 48a746ea72269d34ea3f508e1cd7ca3e, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 235e5a16243f8864aaf9f78d3d91b591, type: 3}
 --- !u!23 &570890099615574558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -333,7 +356,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557363214511302726}
-  m_Mesh: {fileID: 4300004, guid: 48a746ea72269d34ea3f508e1cd7ca3e, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 235e5a16243f8864aaf9f78d3d91b591, type: 3}
 --- !u!23 &571069904223189944
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -529,7 +552,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557512434771928944}
-  m_Mesh: {fileID: 4300004, guid: 1766e30d3cb6c8448bca951d37459903, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 1766e30d3cb6c8448bca951d37459903, type: 3}
 --- !u!23 &570448754852967132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -613,7 +636,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557691976225915156}
-  m_Mesh: {fileID: 4300002, guid: 48a746ea72269d34ea3f508e1cd7ca3e, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 235e5a16243f8864aaf9f78d3d91b591, type: 3}
 --- !u!23 &570870628812301258
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -727,7 +750,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557700223614073178}
-  m_Mesh: {fileID: 4300004, guid: 48a746ea72269d34ea3f508e1cd7ca3e, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 235e5a16243f8864aaf9f78d3d91b591, type: 3}
 --- !u!23 &571212408188746988
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -840,7 +863,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558247067760960854}
-  m_Mesh: {fileID: 4300000, guid: d7a4c612c1099a74bae3e342b76dc76e, type: 3}
+  m_Mesh: {fileID: 4300000, guid: bc67eb85b525f8d48af0fa5a09789f9e, type: 3}
 --- !u!23 &570754260791025186
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -980,9 +1003,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4260100279101694, guid: 812f81839d590a64eb385d5af445bec4, type: 3}
   m_PrefabInstance: {fileID: 6971452407401446663}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &6984055113329203647 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23584629341070520, guid: 812f81839d590a64eb385d5af445bec4, type: 3}
+--- !u!33 &6973697518560710971 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 33812142174104636, guid: 812f81839d590a64eb385d5af445bec4, type: 3}
   m_PrefabInstance: {fileID: 6971452407401446663}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6971452407807024569
@@ -1047,8 +1070,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4509738153826512, guid: 56a29380a11134c43ab1aa20fa525b14, type: 3}
   m_PrefabInstance: {fileID: 6971452407807024569}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &6984477616001400387 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23162748503270394, guid: 56a29380a11134c43ab1aa20fa525b14, type: 3}
+--- !u!33 &6974007917198082091 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 33553003835006354, guid: 56a29380a11134c43ab1aa20fa525b14, type: 3}
   m_PrefabInstance: {fileID: 6971452407807024569}
   m_PrefabAsset: {fileID: 0}

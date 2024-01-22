@@ -1,31 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CarPartsManagement : MonoBehaviour
+namespace DW.Character
 {
-    public Transform targetCarFollow;
+    using Save;
+    using SO;
 
-    [SerializeField] private Renderer carColorsTextures;
-    [SerializeField] private Renderer carBullBars;
-    [SerializeField] private Renderer carHeadLight;
-    [SerializeField] private Renderer carExhaust;
-    [SerializeField] private Renderer[] carTires;
-    [SerializeField] private Renderer[] carWeapons;
-
-    public void SettingAttributesCar(Color _carColor)
+    public class CarPartsManagement : MonoBehaviour
     {
-        carColorsTextures.GetComponent<Renderer>().material.color = _carColor;
-    }
+        public Transform targetCarFollow;
 
-    public void SettingAttributesCar(Color _carColor, Renderer _carBullBars, Renderer _carHeadLight,
-                                    Renderer _carExhaust, Renderer[] _carTires, Renderer[] _carWeapons)
-    {
-        carColorsTextures.GetComponent<Renderer>().material.color = _carColor;
-        //carBullBars
-        //carHeadLight;
-        //carExhaust;
-        //carTires;
-        //carWeapons;
+        [SerializeField] private ColorTexturersSO[] color;
+        [SerializeField] private TiresSO[] tires;
+        [SerializeField] private BullbarSO[] bullbar;
+        [SerializeField] private HeadlightSO[] headlight;
+        [SerializeField] private WeaponsSO[] gun;
+
+        [SerializeField] private Renderer carColorsTextures;
+        [SerializeField] private MeshFilter carBullBars;
+        [SerializeField] private MeshFilter carHeadLight;
+        [SerializeField] private MeshFilter[] carTires;
+        [SerializeField] private MeshFilter[] carWeapons;
+
+        private void Start()
+        {
+            SaveOrLoad.LoadData();
+            SettingCarsAttributes(SaveOrLoad.data);
+        }
+
+        public void SettingCarsAttributes(Datas data)
+        {
+            carColorsTextures.GetComponent<Renderer>().sharedMaterial.color = color[data.paintingSelected].color;
+            carBullBars.GetComponent<MeshFilter>().sharedMesh = bullbar[data.bullbarSelected].carBullBar.sharedMesh;
+            carHeadLight.GetComponent<MeshFilter>().sharedMesh = headlight[data.headlightSelected].carHeadlight.sharedMesh;
+
+            for (int i = 0; i < carTires.Length; i++)
+            {
+                carTires[i].GetComponent<MeshFilter>().sharedMesh = tires[data.tiresSelected].carTires[i].sharedMesh;
+            }
+            for (int i = 0; i < carWeapons.Length; i++)
+            {
+                carWeapons[i].GetComponent<MeshFilter>().sharedMesh = gun[data.gunSelected].carGun[i].sharedMesh;
+            }
+        }
     }
 }

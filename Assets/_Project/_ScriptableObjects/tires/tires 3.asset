@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c6d8b3af957e5439dcbbe97e0318d0, type: 3}
+  m_Name: tires 3
+  m_EditorClassIdentifier: 
+  name: Tires 3
+  image: {fileID: 21300000, guid: f2d8a11d4dda21a4db5b75f40bafc685, type: 3}
+  carTires:
+  - {fileID: 33279581443013520, guid: 883fe5797a20c544fae33dcf03b9f53b, type: 3}
+  - {fileID: 33279581443013520, guid: 883fe5797a20c544fae33dcf03b9f53b, type: 3}
+  - {fileID: 33279581443013520, guid: a578e981592932e4e88cd02b5b63782d, type: 3}
+  - {fileID: 33279581443013520, guid: a578e981592932e4e88cd02b5b63782d, type: 3}
+  indexToSelectCustom: 2
+  value: 1250
+  resaleAuthorization: 1
+  locked: 1

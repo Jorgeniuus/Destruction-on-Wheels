@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221664ea697db994e9512d5fa545d7ba, type: 3}
+  m_Name: gun 3
+  m_EditorClassIdentifier: 
+  name: Gun 3
+  image: {fileID: 21300000, guid: a0029c13e9f16ca4b9aa67d3b632c4df, type: 3}
+  carGun:
+  - {fileID: 33974821646668742, guid: 97c7d7e1e1cc96245b1474c6dd4265cb, type: 3}
+  - {fileID: 33435151508440142, guid: e932ea4dea415e940b3a2cd48fd13fc7, type: 3}
+  indexToSelectCustom: 2
+  value: 1500
+  resaleAuthorization: 1
+  locked: 1
