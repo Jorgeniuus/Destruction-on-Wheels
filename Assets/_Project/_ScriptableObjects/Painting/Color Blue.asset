@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df643323e214ed41a750f92e7c4e531, type: 3}
   m_Name: Color Blue
   m_EditorClassIdentifier: 
+  typeName: Paintings
   name: Blue
-  imageColor: {fileID: 0}
-  color: {r: 0, g: 0.018124819, b: 1, a: 0}
+  image: {fileID: 21300000, guid: 0c1cc3ca6097d9a4f8be0bdbafce710d, type: 3}
+  color: {r: 0, g: 0.018124819, b: 1, a: 1}
   indexToSelectCustom: 0
   value: 0
-  saleValue: 0
+  equiped: 0
+  resaleAuthorization: 0
   locked: 0

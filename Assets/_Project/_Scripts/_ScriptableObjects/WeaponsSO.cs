@@ -7,6 +7,7 @@ namespace DW.SO
     [CreateAssetMenu(fileName = "gun", menuName = "ScriptableObjects/weapon", order = 3)]
     public class WeaponsSO : ScriptableObject
     {
+        public string typeName = "Guns";
         public string name;
         public Sprite image;
         public MeshFilter[] carGun;

@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DW.Character
 {
     using SO;
+    using Camera;
 
     public class CarGenerateManager : MonoBehaviour
     {
@@ -17,6 +16,14 @@ namespace DW.Character
         {
             Instance = this;
             SpawningCar();
+        }
+
+        private void Start() => CallingActionTargetCamera();
+
+        private void CallingActionTargetCamera()
+        {
+            Transform targetFollow = CarInstantiated.GetComponent<CarPartsManagement>().targetCarFollow;
+            CameraFindAndFollowCar.OnTargetFollowAndLookAt?.Invoke(targetFollow);
         }
         private void SpawningCar()
         {

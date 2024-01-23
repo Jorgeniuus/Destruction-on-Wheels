@@ -28,10 +28,14 @@ namespace DW.Cash
 
         public static bool RequestSale(int saleValue, bool resaleAuthorized)
         {
-
-            int coins = saleValue - (30 * saleValue / 100);
-
-            return true;
+            if (resaleAuthorized)
+            {
+                int coins = saleValue - (30 * saleValue / 100);
+                SaveOrLoad.data.coins = coins;
+                SaveOrLoad.SaveData();
+                return true;
+            }
+            else return false;
         }
     }
 }

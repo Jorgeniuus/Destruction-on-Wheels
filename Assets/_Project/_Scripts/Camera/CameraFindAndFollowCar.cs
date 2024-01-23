@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 namespace DW.Camera
 {
-    using Character;
-
     public class CameraFindAndFollowCar : MonoBehaviour
     {
+        public static Action<Transform> OnTargetFollowAndLookAt;
+
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
 
-        private void Start()
+        private void OnEnable() => OnTargetFollowAndLookAt += CameraFollowAndLookAt;
+        private void OnDisable() => OnTargetFollowAndLookAt -= CameraFollowAndLookAt;
+        
+        private void CameraFollowAndLookAt(Transform targetFollow)
         {
-            CameraFollowAndLookAt();
-        }
-        private void CameraFollowAndLookAt()
-        {
-            Transform targetFollow = CarGenerateManager.Instance.CarInstantiated.GetComponent<CarPartsManagement>().targetCarFollow;
             _virtualCamera.Follow = targetFollow;
             _virtualCamera.LookAt = targetFollow;
         }

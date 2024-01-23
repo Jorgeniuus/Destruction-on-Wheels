@@ -7,6 +7,7 @@ namespace DW.SO
     [CreateAssetMenu(fileName = "bullbar", menuName = "ScriptableObjects/bullbar", order = 2)]
     public class BullbarSO : ScriptableObject
     {
+        public string typeName = "Bull Bar";
         public string name;
         public Sprite image;
         public MeshFilter carBullBar;
