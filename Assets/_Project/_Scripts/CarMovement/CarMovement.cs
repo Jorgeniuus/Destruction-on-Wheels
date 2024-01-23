@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace DW.InputCharacter
 {
     public class CarMovement : MonoBehaviour
     {
+        public static Action<bool> OnBrakingCar;
+
         [Header("Vehicle Settings")]
         [SerializeField] private float motorForce;
-        [SerializeField] private float breakForce;
+        [SerializeField] private float brakeForce;
         [SerializeField] private float maxSteerAngle;
 
         [Header("Wheels Settings")]
@@ -17,9 +18,13 @@ namespace DW.InputCharacter
         [SerializeField] private Transform[] frontWheelTransform;
         [SerializeField] private Transform[] rearWheelTransform;
 
+        private bool _isOnGaragebraking = false;
         private bool _isBreaking;
         private float _horizontal;
         private float _vertical;
+
+        private void OnEnable() => OnBrakingCar += HandBrakeGarage;
+        private void OnDisable() => OnBrakingCar -= HandBrakeGarage;
 
         private void Update()
         {
@@ -35,6 +40,8 @@ namespace DW.InputCharacter
 
         private void InputMovement()
         {
+            if (_isOnGaragebraking) return;
+
             _horizontal = Input.GetAxis("Horizontal");
             _vertical = Input.GetAxis("Vertical");
 
@@ -45,11 +52,15 @@ namespace DW.InputCharacter
             foreach (WheelCollider wheels in rearWheelCollider) wheels.motorTorque = _vertical * motorForce;
             foreach (WheelCollider wheels in frontWheelCollider) wheels.motorTorque = _vertical * motorForce;
 
-            float currentBreaking = _isBreaking ? breakForce : 0f;
-            BreakingManager(currentBreaking);
+            float currentBraking = _isBreaking ? brakeForce : 0f;
+            BrakingManager(currentBraking);
         }
-
-        private void BreakingManager(float currentBreaking)
+        public void HandBrakeGarage(bool handBrake)
+        {
+            _isOnGaragebraking = handBrake;
+            if (handBrake) BrakingManager(brakeForce * 10);
+        }
+        private void BrakingManager(float currentBreaking)
         {
             for (int i = 0; i < rearWheelCollider.Length; i++)
             {

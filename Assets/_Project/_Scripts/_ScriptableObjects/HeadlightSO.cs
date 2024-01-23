@@ -7,6 +7,7 @@ namespace DW.SO
     [CreateAssetMenu(fileName = "headlight", menuName = "ScriptableObjects/headlight", order = 6)]
     public class HeadlightSO : ScriptableObject
     {
+        public string typeName = "Headlight";
         public string name;
         public Sprite image;
         public MeshFilter carHeadlight;

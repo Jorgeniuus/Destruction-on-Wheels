@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2f169c502fc4df94293f60c79a29e4aa, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -154,37 +154,6 @@ Transform:
   - {fileID: 963194228}
   - {fileID: 872577508}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &331741265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 331741266}
-  m_Layer: 0
-  m_Name: spwanpoint (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &331741266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331741265}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.59, y: 0, z: 10.52}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 983674021}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
@@ -376,7 +345,6 @@ GameObject:
   m_Component:
   - component: {fileID: 888662641}
   - component: {fileID: 888662643}
-  - component: {fileID: 888662644}
   m_Layer: 0
   m_Name: '--- CarGenerateManager --- '
   m_TagString: Untagged
@@ -413,29 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   car: {fileID: 11400000, guid: a4745ad1f6f58604ea73c43f73cd878b, type: 2}
   spawnPoint: {fileID: 891941117}
---- !u!114 &888662644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888662639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9737e48111649a43b9da1a2f36a52c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 11400000, guid: a4745ad1f6f58604ea73c43f73cd878b, type: 2}
-  CustomCarParts: []
-  color: []
-  tires: []
-  bullbar: []
-  headlight: []
-  gun:
-  - {fileID: 11400000, guid: e26bb78365b22524d8fe07fec2fcf8a6, type: 2}
-  - {fileID: 11400000, guid: b77e599fc9ce85b469c3bab6141ff922, type: 2}
-  - {fileID: 11400000, guid: 63056b3ac503d0b4781d68908070ee59, type: 2}
-  spawnPoint: {fileID: 331741266}
 --- !u!1 &891941116
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +561,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 891941117}
-  - {fileID: 331741266}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

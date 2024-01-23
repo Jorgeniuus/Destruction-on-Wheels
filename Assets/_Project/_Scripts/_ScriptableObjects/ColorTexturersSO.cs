@@ -6,8 +6,8 @@ namespace DW.SO
     [CreateAssetMenu(fileName = "Painting", menuName = "ScriptableObjects/painting", order = 1)]
     public class ColorTexturersSO : ScriptableObject
     {
+        public string typeName = "Paintings";
         public string name;
-        public Image imageColor;
         public Color color;
 
         public int indexToSelectCustom;

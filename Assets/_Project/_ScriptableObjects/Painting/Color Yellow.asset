@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df643323e214ed41a750f92e7c4e531, type: 3}
   m_Name: Color Yellow
   m_EditorClassIdentifier: 
+  typeName: Paintings
   name: Yellow
-  imageColor: {fileID: 0}
-  color: {r: 1, g: 0.965744, b: 0, a: 0}
+  image: {fileID: 21300000, guid: 0c1cc3ca6097d9a4f8be0bdbafce710d, type: 3}
+  color: {r: 1, g: 0.965744, b: 0, a: 1}
   indexToSelectCustom: 0
   value: 0
   equiped: 1

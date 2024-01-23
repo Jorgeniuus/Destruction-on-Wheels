@@ -7,11 +7,16 @@ namespace DW.Cash
     using Save;
     using Cash;
     using Character;
+    using Camera;
+    using InputCharacter;
 
     public class GarageManager : MonoBehaviour
     {
+        public static Action<bool> OnBrakingCar;
         public static Action OnSecelectItem; //pensando como vou usar para o UI da garagem
+
         public static GarageManager Instance { get; private set; }
+
         public GameObject CarInstantiated { get; private set; }
 
         [SerializeField] private CarsSO car;
@@ -35,16 +40,23 @@ namespace DW.Cash
         private void Start()
         {
             SaveOrLoad.LoadData();
+            CallingActions();
         }
         private void Update()
         {
             ClickItem();
             SellItem();
         }
+        private void CallingActions()
+        {
+            Transform targetFollow = CarInstantiated.GetComponent<CarPartsManagement>().targetCarFollow;
+            CameraFindAndFollowCar.OnTargetFollowAndLookAt?.Invoke(targetFollow);
 
+            CarMovement.OnBrakingCar?.Invoke(true);
+        }
         private void SpawningCar()
         {
-            //CarInstantiated = Instantiate(car.car, spawnPoint.position, Quaternion.identity); //ATIVAAR QUANDO TIVER A GARAGEM
+            CarInstantiated = Instantiate(car.car, spawnPoint.position, spawnPoint.rotation); 
         }
 
         private void UnlockItem()
@@ -54,7 +66,7 @@ namespace DW.Cash
             if (hasCash)
             {
                 SaveOrLoad.data.getGunLocked[2] = false;
-                gun[2].locked = SaveOrLoad.data.getGunLocked[2];
+                gun[2].locked = SaveOrLoad.data.getGunLocked[2]; //talvez ttirar os dados de save de booleanas
 
                 SaveOrLoad.SaveData();
                 print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
@@ -73,7 +85,7 @@ namespace DW.Cash
             print("Item Equipado");
         }
 
-        public void ClickItem()
+        public void ClickItem() //o array ddo scriptaable, index
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
@@ -104,7 +116,17 @@ namespace DW.Cash
         }
         public void SellItem()
         {
+            bool hasCash = CoinsManager.RequestSale(gun[2].value, true); //enviar o bool do scriptable
 
+            if (hasCash)
+            {
+                SaveOrLoad.data.getGunLocked[2] = true;
+                gun[2].locked = SaveOrLoad.data.getGunLocked[2]; //talvez ttirar os dados de save de booleanas
+
+                SaveOrLoad.SaveData();
+                print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
+                print("Item Comprado");
+            }
         }
     }
 }
