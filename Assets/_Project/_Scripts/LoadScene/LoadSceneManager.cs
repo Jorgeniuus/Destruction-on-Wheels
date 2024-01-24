@@ -76,5 +76,10 @@ namespace DW.LoadScene
             }
             loadingAllCanvasObjects.alpha = end;
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
