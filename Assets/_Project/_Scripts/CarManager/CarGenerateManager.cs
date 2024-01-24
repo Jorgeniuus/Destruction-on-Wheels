@@ -9,7 +9,7 @@ namespace DW.Character
     {
         public static CarGenerateManager Instance { get; private set; }
         public GameObject CarInstantiated { get; set; }
-        [SerializeField] private CarsSO car;
+        public CarsSO car;
         [SerializeField] private Transform spawnPoint;
 
         private void Awake()
