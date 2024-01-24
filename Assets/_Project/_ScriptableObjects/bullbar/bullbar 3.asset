@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc52e386c8646dc48a3aef5cebae15cd, type: 3}
   m_Name: bullbar 3
   m_EditorClassIdentifier: 
+  typeName: Bull Bar
   name: Bullbar 3
   image: {fileID: 21300000, guid: c995674c9768a5748ad60b387d1aebe8, type: 3}
   carBullBar: {fileID: 33968969086142770, guid: d9c29ff50c9161c4f9f44a7fcbe0ca8b, type: 3}
   indexToSelectCustom: 2
   value: 500
+  equiped: 0
   resaleAuthorization: 1
-  locked: 1
+  locked: 0

@@ -1,3 +1,5 @@
+using System;
+
 namespace DW.Cash
 {
     using Save;
@@ -5,11 +7,6 @@ namespace DW.Cash
 
     public class CoinsManager
     {
-        public static int ShowCoins()
-        {
-            SaveOrLoad.LoadData();
-            return SaveOrLoad.data.coins;
-        }
         public static bool RequestCoins(int value)
         {
             int coins = SaveOrLoad.data.coins;
@@ -31,7 +28,7 @@ namespace DW.Cash
             if (resaleAuthorized)
             {
                 int coins = saleValue - (30 * saleValue / 100);
-                SaveOrLoad.data.coins = coins;
+                SaveOrLoad.data.coins += coins;
                 SaveOrLoad.SaveData();
                 return true;
             }

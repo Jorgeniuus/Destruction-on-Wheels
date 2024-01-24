@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221664ea697db994e9512d5fa545d7ba, type: 3}
   m_Name: gun 3
   m_EditorClassIdentifier: 
+  typeName: Guns
   name: Gun 3
   image: {fileID: 21300000, guid: a0029c13e9f16ca4b9aa67d3b632c4df, type: 3}
   carGun:
@@ -19,5 +20,6 @@ MonoBehaviour:
   - {fileID: 33435151508440142, guid: e932ea4dea415e940b3a2cd48fd13fc7, type: 3}
   indexToSelectCustom: 2
   value: 1500
+  equiped: 0
   resaleAuthorization: 1
-  locked: 1
+  locked: 0

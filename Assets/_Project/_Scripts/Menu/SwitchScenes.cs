@@ -10,5 +10,10 @@ namespace DW.LoadScene
         {
             LoadSceneManager.Instance.LoadSceneAsync(nameScene);
         }
+
+        public void QuitGame()
+        {
+            LoadSceneManager.Instance.QuitGame();
+        }
     }
 }

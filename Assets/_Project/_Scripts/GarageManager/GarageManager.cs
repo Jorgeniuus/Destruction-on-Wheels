@@ -5,23 +5,22 @@ namespace DW.Cash
 {
     using SO;
     using Save;
-    using Cash;
     using Character;
     using Camera;
     using InputCharacter;
+    using UI;
 
     public class GarageManager : MonoBehaviour
     {
         public static Action<bool> OnBrakingCar;
-        public static Action OnSecelectItem; //pensando como vou usar para o UI da garagem
+        public static Action<ScriptableObject, bool, int, int> OnButtonBuyEquip;
+        public static Action<ScriptableObject, bool, int, int> OnButtonSellItem;
 
         public static GarageManager Instance { get; private set; }
 
         public GameObject CarInstantiated { get; private set; }
 
         [SerializeField] private CarsSO car;
-
-        [SerializeField] private ScriptableObject[] CustomCarParts;
 
         [SerializeField] private ColorTexturersSO[] color;
         [SerializeField] private TiresSO[] tires;
@@ -37,6 +36,17 @@ namespace DW.Cash
             SpawningCar();
         }
 
+        private void OnEnable()
+        {
+            OnButtonBuyEquip += ClickItem;
+            OnButtonSellItem += SellItem;
+        }
+        private void OnDisable()
+        {
+            OnButtonBuyEquip -= ClickItem;
+            OnButtonSellItem -= SellItem;
+        }
+
         private void Start()
         {
             SaveOrLoad.LoadData();
@@ -44,8 +54,6 @@ namespace DW.Cash
         }
         private void Update()
         {
-            ClickItem();
-            SellItem();
         }
         private void CallingActions()
         {
@@ -59,73 +67,243 @@ namespace DW.Cash
             CarInstantiated = Instantiate(car.car, spawnPoint.position, spawnPoint.rotation); 
         }
 
-        private void UnlockItem()
+        private void CallActions()
         {
-            bool hasCash = CoinsManager.RequestCoins(gun[2].value);
+            ShowCoinsScreenUI.OnChangevalueShowedCoin?.Invoke(SaveOrLoad.data.coins);
+            AutoLoadDatas.OnAutoLoad?.Invoke(SaveOrLoad.data);
+        }
+        private void UnlockItem(ScriptableObject scriptable, int itemIndex, int itemValue)
+        {
+            bool hasCash = CoinsManager.RequestCoins(itemValue);
 
             if (hasCash)
             {
-                SaveOrLoad.data.getGunLocked[2] = false;
-                gun[2].locked = SaveOrLoad.data.getGunLocked[2]; //talvez ttirar os dados de save de booleanas
-
-                SaveOrLoad.SaveData();
-                print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
-                print("Item Comprado");
-            }
-        }
-
-        private void EquipItem()
-        {
-            SaveOrLoad.data.gunSelected = 2;
-            SaveOrLoad.SaveData();
-
-            CarGenerateManager.Instance.CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
-
-            print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
-            print("Item Equipado");
-        }
-
-        public void ClickItem() //o array ddo scriptaable, index
-        {
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                if (gun[2].locked)
+                if (scriptable is HeadlightSO)
                 {
-                    UnlockItem();
-                    return;
+                    SaveOrLoad.data.getHeadlightLocked[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
+
+                    headlight[itemIndex].locked = SaveOrLoad.data.getHeadlightLocked[itemIndex]; 
+
+                    print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
                 }
-                else EquipItem();
-            }
+                if (scriptable is TiresSO)
+                {
+                    SaveOrLoad.data.getTiresLocked[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
 
-            // =============== TESTTES ===============
+                    tires[itemIndex].locked = SaveOrLoad.data.getTiresLocked[itemIndex];
 
-            if (Input.GetKeyDown(KeyCode.M)) 
-            {
-                SaveOrLoad.LoadData();
-                SaveOrLoad.data.coins = 5000;
-                SaveOrLoad.data.getGunLocked[2] = true;
-                gun[2].locked = SaveOrLoad.data.getGunLocked[2];
-                SaveOrLoad.data.gunSelected = 0;
-                CarGenerateManager.Instance.CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
-                print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
+                    print(SaveOrLoad.data.tiresSelected + "-" + SaveOrLoad.data.getTiresLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                if (scriptable is BullbarSO)
+                {
+                    SaveOrLoad.data.getBullbarLocked[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
 
-                SaveOrLoad.SaveData();
+                    bullbar[itemIndex].locked = SaveOrLoad.data.getBullbarLocked[itemIndex];
 
-                print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
+                    print(SaveOrLoad.data.bullbarSelected + "-" + SaveOrLoad.data.getBullbarLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                if (scriptable is WeaponsSO)
+                {
+                    SaveOrLoad.data.getGunLocked[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
+
+                    gun[itemIndex].locked = SaveOrLoad.data.getGunLocked[itemIndex];
+
+                    print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                CallActions();
             }
         }
-        public void SellItem()
+
+        private void EquipItem(ScriptableObject scriptable, int itemIndex)
         {
-            bool hasCash = CoinsManager.RequestSale(gun[2].value, true); //enviar o bool do scriptable
+            if (scriptable is HeadlightSO)
+            {
+                SaveOrLoad.data.verifyHeadlightEquiped[itemIndex] = true;
+
+                for (int i = 0; i < SaveOrLoad.data.verifyHeadlightEquiped.Length; i++)
+                {
+                    if(i != itemIndex) SaveOrLoad.data.verifyHeadlightEquiped[i] = false;
+                    headlight[i].equiped = false;
+                }
+
+                SaveOrLoad.data.headlightSelected = itemIndex;
+                SaveOrLoad.SaveData();
+                SaveOrLoad.LoadData();
+
+                headlight[itemIndex].equiped = SaveOrLoad.data.verifyHeadlightEquiped[itemIndex];
+
+                CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
+
+                print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                print("Item Equipado");
+            }
+            if (scriptable is TiresSO)
+            {
+                SaveOrLoad.data.verifyTiresEquiped[itemIndex] = true;
+
+                for (int i = 0; i < SaveOrLoad.data.verifyTiresEquiped.Length; i++)
+                {
+                    if (i != itemIndex) SaveOrLoad.data.verifyTiresEquiped[i] = false;
+                    tires[i].equiped = false;
+                }
+
+                SaveOrLoad.data.tiresSelected = itemIndex;
+                SaveOrLoad.SaveData();
+                SaveOrLoad.LoadData();
+
+                tires[itemIndex].equiped = SaveOrLoad.data.verifyTiresEquiped[itemIndex];
+
+                CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
+
+                print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                print("Item Equipado");
+            }
+            if (scriptable is BullbarSO)
+            {
+                SaveOrLoad.data.verifyBullbarEquiped[itemIndex] = true;
+
+                for (int i = 0; i < SaveOrLoad.data.verifyBullbarEquiped.Length; i++)
+                {
+                    if (i != itemIndex) SaveOrLoad.data.verifyBullbarEquiped[i] = false;
+                    bullbar[i].equiped = false;
+                }
+
+                SaveOrLoad.data.bullbarSelected = itemIndex;
+                SaveOrLoad.SaveData();
+                SaveOrLoad.LoadData();
+
+                bullbar[itemIndex].equiped = SaveOrLoad.data.verifyBullbarEquiped[itemIndex];
+
+                CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
+
+                print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                print("Item Equipado");
+            }
+            if (scriptable is WeaponsSO)
+            {
+                SaveOrLoad.data.verifyGunEquiped[itemIndex] = true;
+
+                for (int i = 0; i < SaveOrLoad.data.verifyGunEquiped.Length; i++)
+                {
+                    if (i != itemIndex) SaveOrLoad.data.verifyGunEquiped[i] = false;
+                    gun[i].equiped = false;
+                }
+
+                SaveOrLoad.data.gunSelected = itemIndex;
+                SaveOrLoad.SaveData();
+                SaveOrLoad.LoadData();
+
+                gun[itemIndex].equiped = SaveOrLoad.data.verifyGunEquiped[itemIndex];
+
+                CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
+
+                print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                print("Item Equipado");
+            }
+            if (scriptable is ColorTexturersSO)
+            {
+                SaveOrLoad.data.verifyPaintingEquiped[itemIndex] = true;
+
+                for (int i = 0; i < SaveOrLoad.data.verifyPaintingEquiped.Length; i++)
+                {
+                    if (i != itemIndex) SaveOrLoad.data.verifyPaintingEquiped[i] = false;
+                    color[i].equiped = false;
+                }
+
+                SaveOrLoad.data.paintingSelected = itemIndex;
+                SaveOrLoad.SaveData();
+                SaveOrLoad.LoadData();
+
+                color[itemIndex].equiped = SaveOrLoad.data.verifyPaintingEquiped[itemIndex];
+
+                CarInstantiated.GetComponent<CarPartsManagement>().SettingCarsAttributes(SaveOrLoad.data);
+
+                print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                print("Item Equipado");
+            }
+
+        }
+
+        public void ClickItem(ScriptableObject scriptable, bool locked, int intemIndex, int itemValue) 
+        {
+            if (locked)
+            {
+                UnlockItem(scriptable, intemIndex, itemValue);
+                return;
+            }
+            else EquipItem(scriptable, intemIndex);
+        }
+        public void SellItem(ScriptableObject scriptable, bool autthotrized, int itemIndex, int itemVValuee)
+        {
+            bool hasCash = CoinsManager.RequestSale(itemVValuee , autthotrized); 
 
             if (hasCash)
             {
-                SaveOrLoad.data.getGunLocked[2] = true;
-                gun[2].locked = SaveOrLoad.data.getGunLocked[2]; //talvez ttirar os dados de save de booleanas
+                if (scriptable is HeadlightSO)
+                {
+                    SaveOrLoad.data.getHeadlightLocked[itemIndex] = true;
+                    SaveOrLoad.data.verifyHeadlightEquiped[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
 
-                SaveOrLoad.SaveData();
-                print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[2] + "-" + SaveOrLoad.data.coins);
-                print("Item Comprado");
+                    headlight[itemIndex].locked = SaveOrLoad.data.getHeadlightLocked[itemIndex];
+                    headlight[itemIndex].equiped = SaveOrLoad.data.verifyHeadlightEquiped[itemIndex];
+
+                    print(SaveOrLoad.data.headlightSelected + "-" + SaveOrLoad.data.getHeadlightLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                if (scriptable is TiresSO)
+                {
+                    SaveOrLoad.data.getTiresLocked[itemIndex] = true;
+                    SaveOrLoad.data.verifyTiresEquiped[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
+
+                    tires[itemIndex].locked = SaveOrLoad.data.getTiresLocked[itemIndex];
+                    headlight[itemIndex].equiped = SaveOrLoad.data.verifyTiresEquiped[itemIndex];
+
+                    print(SaveOrLoad.data.tiresSelected + "-" + SaveOrLoad.data.getTiresLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                if (scriptable is BullbarSO)
+                {
+                    SaveOrLoad.data.getBullbarLocked[itemIndex] = true;
+                    SaveOrLoad.data.verifyBullbarEquiped[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
+
+                    bullbar[itemIndex].locked = SaveOrLoad.data.getBullbarLocked[itemIndex];
+                    headlight[itemIndex].equiped = SaveOrLoad.data.verifyBullbarEquiped[itemIndex];
+
+                    print(SaveOrLoad.data.bullbarSelected + "-" + SaveOrLoad.data.getBullbarLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                if (scriptable is WeaponsSO)
+                {
+                    SaveOrLoad.data.getGunLocked[itemIndex] = true;
+                    SaveOrLoad.data.verifyGunEquiped[itemIndex] = false;
+                    SaveOrLoad.SaveData();
+                    SaveOrLoad.LoadData();
+
+                    gun[itemIndex].locked = SaveOrLoad.data.getGunLocked[itemIndex];
+                    headlight[itemIndex].equiped = SaveOrLoad.data.verifyGunEquiped[itemIndex];
+
+                    print(SaveOrLoad.data.gunSelected + "-" + SaveOrLoad.data.getGunLocked[itemIndex] + "-" + SaveOrLoad.data.coins);
+                    print("Item Comprado");
+                }
+                CallActions();
             }
         }
     }
