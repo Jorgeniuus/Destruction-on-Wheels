@@ -3,9 +3,12 @@ using System;
 
 namespace DW.InputCharacter
 {
+    using Sounds;
+
     public class CarMovement : MonoBehaviour
     {
         public static Action<bool> OnBrakingCar;
+
 
         [Header("Vehicle Settings")]
         [SerializeField] private float motorForce;
@@ -18,6 +21,8 @@ namespace DW.InputCharacter
         [SerializeField] private Transform[] frontWheelTransform;
         [SerializeField] private Transform[] rearWheelTransform;
 
+        [SerializeField] private AudioSource carEngineSound;
+
         private bool _isOnGaragebraking = false;
         private bool _isBreaking;
         private float _horizontal;
@@ -29,6 +34,7 @@ namespace DW.InputCharacter
         private void Update()
         {
             InputMovement();
+            CarSoundsManager();
         }
 
         private void FixedUpdate()
@@ -89,6 +95,15 @@ namespace DW.InputCharacter
 
             wheelCollider.GetWorldPose(out position, out rotation);
             wheelTransform.rotation = rotation;
+        }
+
+        private void CarSoundsManager()
+        {
+            float acceleeration = rearWheelCollider[0].rpm;
+            float steering = Mathf.Sign(acceleeration);
+            float normalizedAccelerattion = Mathf.InverseLerp(-5f, 1000f, acceleeration * steering);
+            float pitch = Mathf.Lerp(0.5f, 2f, normalizedAccelerattion);
+            carEngineSound.pitch = pitch;
         }
     }
 }

@@ -8,8 +8,6 @@ namespace DW.UI
 
     public class ContentUI : MonoBehaviour
     {            
-        [SerializeField] private Button _buttonBuyEquip;
-        [SerializeField] private Button _buttonSell;
 
         [SerializeField] private Image imageContent;
         [SerializeField] private GameObject imageLocked;
@@ -18,6 +16,9 @@ namespace DW.UI
         [SerializeField] private TMP_Text priceContent;
 
         private ScriptableObject _scriptableObject;
+
+        [SerializeField] private Button _buttonBuyEquip;
+        [SerializeField] private Button _buttonSell;
 
         private string _buyText = "Buy";
         private string _equipText = "Equip";
@@ -30,6 +31,12 @@ namespace DW.UI
         private bool _authorized;
         private bool _equiped;
 
+        private string _meyEnumName;
+
+        public void FromWhatEnumAMI(string myEnumName)
+        {
+            _meyEnumName = myEnumName;
+        }
         public void InicializeContent(ScriptableObject scriptableObject, Sprite imageContent, string nameContent, int indexContent, int priceContent, bool equiped, bool authotizedSell, bool locked)
         {
             this.imageContent.sprite = imageContent;
@@ -86,7 +93,7 @@ namespace DW.UI
         public void BuyOrEquipItem()
         {
             GarageManager.OnButtonBuyEquip?.Invoke(_scriptableObject, _locked, _indexContent, _priceContent);
-            TypeContentUI.OnUpdateListTypeButton?.Invoke();
+            TypeContentUI.OnUpdateListTypeButton?.Invoke(_meyEnumName);
         }
 
         public void SellItem()
@@ -94,7 +101,7 @@ namespace DW.UI
             if (_equiped == false)
                 GarageManager.OnButtonSellItem?.Invoke(_scriptableObject, _authorized, _indexContent, _priceContent);
 
-            TypeContentUI.OnUpdateListTypeButton?.Invoke();
+            TypeContentUI.OnUpdateListTypeButton?.Invoke(_meyEnumName);
         }
     }
 }

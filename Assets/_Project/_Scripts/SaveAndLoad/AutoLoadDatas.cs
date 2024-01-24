@@ -26,9 +26,6 @@ namespace DW.Save
 
         public void AutoLoadingDatas(Datas data)
         {
-            print("Chamou Auto Load do Scriptable: "+ headlight[3].locked);
-            print("Chamou Auto Load do Save: " + data.getHeadlightLocked[3]);
-
             for (int i = 0; i < color.Length ; i++)
             {
                 color[i].equiped = data.verifyPaintingEquiped[i];
